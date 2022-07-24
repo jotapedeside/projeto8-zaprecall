@@ -2,7 +2,10 @@ import Logo from "./logo.png";
 import SmallLogo from "./logo-pequeno.png";
 import Party from "./party.png"
 import Sad from "./sad.png"
-import Flip from "./setinha.png"
+import Flip from "./flip.png"
+import Success from "./success.png"
+import Attention from "./attention.png"
+import Danger from "./danger.png"
 
 const ImagesLogos = {
     Logo,
@@ -15,4 +18,9 @@ const ImagesEmojis = {
 const ImagesActions = {
     Flip
 }
-export {ImagesLogos, ImagesEmojis, ImagesActions};
+const ImagesIcons = {
+    Success,
+    Attention,
+    Danger
+}
+export {ImagesLogos, ImagesEmojis, ImagesActions, ImagesIcons};
