@@ -2,6 +2,36 @@ import React from "react";
 import Recalls from "./Recalls";
 import { ImagesActions, ImagesIcons } from "../assets/Assets";
 
+/*
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+
+const recallRAndom = shuffle(recall);
+console.log(recall);*/
+
+function shuffle() { 
+  return Math.random();
+}
+const recallRAndom = Recalls().sort(shuffle)
+console.log(recallRAndom);
+
+
 export default function Recall({
   recall,
   setRecall,
@@ -34,7 +64,7 @@ export default function Recall({
 
   return(
     <div className=''>
-      {recall.map((val, index) => {
+      {recallRAndom.map((val, index) => {
         if (showQuestion === index) {
           if(showAnswer === index){
             {/*RESP*/}
@@ -126,13 +156,63 @@ function QuestionInfo({index, recall, showAnswer, setShowAnswer}){
 }
 
 function Answer({index, recall, setRecall, showQuestion, setShowQuestion}){
-  return(
+  
+  function memoryState(state) {
+    switch (state) {
+      case 'danger':
+        setShowQuestion(false);
+        recall[index].state = "answered";
+        recall[index].result = ImagesIcons.Danger;
+        setRecall(recall);        
+        break;
+
+      case 'attention':
+        setShowQuestion(false);
+        recall[index].state = "answered";
+        recall[index].result = ImagesIcons.Attention;
+        setRecall(recall);
+        break;
+
+      case 'success':
+        setShowQuestion(false);
+        recall[index].state = "answered";
+        recall[index].result = ImagesIcons.Success;
+        setRecall(recall);
+        break;
+
+      default:
+        break;
+    }
+}
+
+return (
+  <div className="question-info" key={index}>
+    <p> {recallRAndom[index].answer} </p>
+    <div className="state-container">
+      <div className="state danger" onClick={() => memoryState("danger")}>
+        <p> Não lembrei </p>
+      </div>
+      <div className="state attention" onClick={() => memoryState("attention")}>
+        <p> Quase não lembrei </p>
+      </div>
+      <div className="state success" onClick={() => memoryState("success")}>
+        <p> Zap! </p>
+      </div>
+    </div>
+  </div>
+
+)
+
+  /*return(
     <div className="answer" key={index}>
       <p>Resposta {index + 1}</p>
       <p>{recall[index].answer}</p>
-      <div className="flip" onClick={() => setShowQuestion(index)}>
-        <img src={ImagesActions.Flip} alt="icone" />
+      <div className="ghost-cont"></div>
+      <div className="flip-container">
+        <div className="flip" onClick={() => setShowAnswer(index)}>
+          <img src={ImagesActions.Flip} alt="icone" />
+        </div>
       </div>
     </div>
-  )
+  )*/
 }

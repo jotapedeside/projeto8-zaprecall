@@ -70,9 +70,9 @@ body {
   border-radius: 5px;
   background-color: #FFFFFF;
   color: #D70900;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  /*add transition ?*/
+  transition: 250ms ease;
 }
 
 .index-page button:hover {
@@ -115,12 +115,12 @@ body {
 
 .question-info {
   width: 300px;
-  height: 100px;
+  height: auto;
   min-height: 80px;  
   background: #FFFFD5;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
-  padding: 15px;
+  padding: 15px 15px 10px 15px;
   margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -143,4 +143,48 @@ body {
 .flip {
   width: 30px;
   height: 20px;
+}
+
+.state-container {
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.state {
+  width: 86px;
+  height: 38px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 200ms ease;
+  cursor: pointer;
+}
+.state p {
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.danger {
+  background: #FF3030;
+}
+.danger:hover {
+  background-color: rgba(255,48,48, 0.7);
+}
+.attention {
+  background: #FF922E;
+}
+.attention:hover {
+  background-color: rgba(255,146,46, 0.7);
+}
+.success {
+  background-color: #2FBE34;
+}
+.success:hover {
+  background-color: rgba(47,190,52, 0.7);
 }
