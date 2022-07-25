@@ -8,6 +8,11 @@ body {
   background-color: #FB6B6B;
   font-family: 'Recursive';
   font-style: normal;
+  font-size: 18px;
+  line-height: 22px;
+}
+p, h1{
+  color: #333333;
 }
 
 .index-page {
@@ -38,13 +43,7 @@ body {
   flex-direction: column;
 }
 
-.recall-page-logo{
-  margin: 30px 0;
-}
-
 .index-page h1, .recall-page-logo h1 {
-  font-family: 'Righteous';
-  font-style: normal;
   font-size: 36px;
   line-height: 45px;
   display: flex;
@@ -85,7 +84,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  margin-bottom: 20px;
+  margin: 20px 0;
   width: 300px;
   height: 65px;
   background: #FFFFFF;
@@ -106,7 +105,6 @@ body {
   font-weight: 600;
   font-size: 16px;
   line-height: 19px;
-  color: #333333;
 }
 
 .question:hover {
@@ -125,12 +123,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
-}
-
-.question-info p {
-  font-size: 18px;
-  line-height: 22px;
-  color: #333333;
 }
 
 .flip-container{
@@ -187,4 +179,72 @@ body {
 }
 .success:hover {
   background-color: rgba(47,190,52, 0.7);
+}
+
+.question .state-danger {
+  color: #FF3030;
+  text-decoration: line-through #FF3030 2px;
+}
+
+.question .state-attention {
+  color: #FF922E;
+  text-decoration: line-through #FF922E 2px;
+}
+
+.question .state-success {
+  color: #2FBE34;
+  text-decoration: line-through #2FBE34 2px;
+}
+.question-info:last-child {
+  margin-bottom: 30px;
+}
+
+.men {
+  /*display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+  max-width: 300px;*/
+  margin: 0 auto;
+}
+
+footer {
+  width: 100%;
+  min-height: 70px;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+footer p {
+  margin: 10px 0;
+}
+
+.rodape-resultado {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rodape-resultado h1 {
+  font-weight: 700;
+  margin-top: 16px;
+}
+
+.rodape-resultado p {
+  text-align: center;
+  margin: 14px auto;
+  width: 220px;
+}
+
+.icon-looseness > *{
+  margin: 0 3px 10px 3px;
 }

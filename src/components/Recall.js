@@ -1,5 +1,5 @@
 import React from "react";
-import Recalls from "./Recalls";
+import Recalls,{recalls} from "./Recalls";
 import { ImagesActions, ImagesIcons } from "../assets/Assets";
 
 /*
@@ -20,17 +20,8 @@ function shuffle(array) {
 
   return array;
 }
-
-
-const recallRAndom = shuffle(recall);
+const recallRandom = shuffle(recall);
 console.log(recall);*/
-
-function shuffle() { 
-  return Math.random();
-}
-const recallRAndom = Recalls().sort(shuffle)
-console.log(recallRAndom);
-
 
 export default function Recall({
   recall,
@@ -38,7 +29,11 @@ export default function Recall({
   showQuestion,
   setShowQuestion,
   showAnswer,
-  setShowAnswer}){
+  setShowAnswer,
+  setQtdeRespondidas,
+  qtdeRespondidas,
+  currentIndex,
+  setCurrentIndex}){
   
   //TODO: componentizar recalls dps
   /*const recalls = [{
@@ -61,10 +56,10 @@ export default function Recall({
     answer: "expressões",
     state: "unanswered"
   }]*/
-
+  
   return(
-    <div className=''>
-      {recallRAndom.map((val, index) => {
+    <div className='men'>
+      {recall.map((val, index) => {
         if (showQuestion === index) {
           if(showAnswer === index){
             {/*RESP*/}
@@ -73,8 +68,10 @@ export default function Recall({
             index={index}
             recall={recall}
             setRecall={setRecall}
-            showQuestion={showQuestion}
             setShowQuestion={setShowQuestion}
+            qtdeRespondidas={qtdeRespondidas}
+            setQtdeRespondidas={setQtdeRespondidas}
+            setCurrentIndex={setCurrentIndex}
             />
           } else {
             {/*PERGUNTA*/}
@@ -93,17 +90,18 @@ export default function Recall({
         showQuestion={showQuestion}
         setShowQuestion={setShowQuestion}
         recall={recall}
-        setRecall={setRecall}/>
+        setRecall={setRecall}
+        />
       })}
     </div>
   )
 }
-function Question({index, showQuestion, setShowQuestion, recall, setRecall}){
+function Question({index, setShowQuestion, recall}){
   if (recall[index].state === "answered"){
     return(
       <div className="question" key={index}>
-        <p>Pergunta {index + 1}</p>
-        <img src={recall[index].result} alt="QUANDO ISSO APARECE?" />
+        <p className={recall[index].linethroughcolor}>Pergunta {index + 1}</p>
+        <img src={recall[index].result} alt="" />
       </div>
     )
   }
@@ -139,7 +137,7 @@ function Question({index, showQuestion, setShowQuestion, recall, setRecall}){
   }*/
 }
 
-function QuestionInfo({index, recall, showAnswer, setShowAnswer}){
+function QuestionInfo({index, recall, setShowAnswer}){
   return(
     <div className="question-info" key={index}>
       <p>
@@ -155,29 +153,37 @@ function QuestionInfo({index, recall, showAnswer, setShowAnswer}){
   )
 }
 
-function Answer({index, recall, setRecall, showQuestion, setShowQuestion}){
+function Answer({index, recall, setRecall, setShowQuestion, qtdeRespondidas, setQtdeRespondidas, setCurrentIndex}){
   
   function memoryState(state) {
+    setCurrentIndex(index)
     switch (state) {
       case 'danger':
-        setShowQuestion(false);
-        recall[index].state = "answered";
+
+        setQtdeRespondidas(qtdeRespondidas + 1);
         recall[index].result = ImagesIcons.Danger;
-        setRecall(recall);        
+        recall[index].state = "answered";
+        recall[index].linethroughcolor = 'state-danger';
+        setRecall(recall);
+        setShowQuestion(false);     
         break;
 
       case 'attention':
-        setShowQuestion(false);
-        recall[index].state = "answered";
+        setQtdeRespondidas(qtdeRespondidas + 1);
         recall[index].result = ImagesIcons.Attention;
+        recall[index].state = "answered";
+        recall[index].linethroughcolor = 'state-attention';
         setRecall(recall);
+        setShowQuestion(false);
         break;
 
       case 'success':
-        setShowQuestion(false);
-        recall[index].state = "answered";
+        setQtdeRespondidas(qtdeRespondidas + 1);
         recall[index].result = ImagesIcons.Success;
+        recall[index].state = "answered";
+        recall[index].linethroughcolor = 'state-success';
         setRecall(recall);
+        setShowQuestion(false);
         break;
 
       default:
@@ -187,7 +193,7 @@ function Answer({index, recall, setRecall, showQuestion, setShowQuestion}){
 
 return (
   <div className="question-info" key={index}>
-    <p> {recallRAndom[index].answer} </p>
+    <p> {recall[index].answer} </p>
     <div className="state-container">
       <div className="state danger" onClick={() => memoryState("danger")}>
         <p> Não lembrei </p>
